@@ -7,28 +7,54 @@
   <body>
     <div id="todo-list"></div>
     <script>
-      const data = [
-        {
-          text: "JS 공부하기",
-        },
-        {
-          text: "JS 복습하기",
-        },
-        {
-          text: "JS 파괴하기",
-        },
-      ];
+      const data = null;
       // 이곳에서 코딩을 시작하세요!
+      function Validator() {
+        this.isFalsy = (todoList) => {
+          console.log(todoList);
+          if (!todoList) {
+            throw new Error("잘못된 데이터 형식입니다.");
+          }
+        };
+        this.isNotArray = (todoList) => {
+          if (!Array.isArray(todoList) || !todoList.length) {
+            throw new Error("잘못된 데이터 형식입니다.");
+          }
+        };
+
+        this.isNotObject = (todoList) => {
+          if (typeof todoList !== "object") {
+            throw new Error("잘못된 데이터 형식입니다.");
+          }
+        };
+
+        this.isNotValidData = (todoList) => {
+          if (todoList.some((item) => !item || !item.hasOwnProperty("text"))) {
+            throw new Error("잘못된 데이터 형식입니다.");
+          }
+        };
+        this.validate = (todoList) => {
+          this.isFalsy(todoList);
+          this.isNotArray(todoList);
+          this.isNotObject(todoList);
+          this.isNotValidData(todoList);
+          return todoList;
+        };
+      }
 
       function TodoList(data) {
+        if (!(this instanceof TodoList)) {
+          console.log(this instanceof TodoList);
+          throw new Error("잘못된 데이터 형식입니다.");
+        }
         const $ = (selector) => document.querySelector(selector);
         this.data = data;
         this.getItem = ({ text }) => {
           return `
-            <li>
-              ${text}
-            </li>
-          `;
+                    <li>
+                      ${text}
+                    </li>
+                  `;
         };
 
         this.render = () => {
@@ -40,7 +66,8 @@
 
         this.render();
       }
-      const todoList = new TodoList(data);
+      const validData = new Validator();
+      const todoList = TodoList(validData.validate(data));
     </script>
   </body>
 </html>
