@@ -7,9 +7,38 @@
   <body>
     <div id="todo-list"></div>
     <script>
-      const data = null;
+      const data = [
+        {
+          text: "JS 공부하기",
+        },
+        {
+          text: "JS 복습하기",
+        },
+      ];
+
+      const data2 = [
+        {
+          text: "기죽지 말기",
+        },
+        {
+          text: "열심히 하기",
+        },
+      ];
+
+      const data3 = [
+        {
+          text: "부족하더라도",
+        },
+        {
+          text: "완주하기",
+        },
+      ];
       // 이곳에서 코딩을 시작하세요!
       function Validator() {
+        if (!(this instanceof Validator)) {
+          console.log(this instanceof Validator);
+          throw new Error("잘못된 데이터 형식입니다.");
+        }
         this.isFalsy = (todoList) => {
           console.log(todoList);
           if (!todoList) {
@@ -29,7 +58,14 @@
         };
 
         this.isNotValidData = (todoList) => {
-          if (todoList.some((item) => !item || !item.hasOwnProperty("text"))) {
+          if (
+            todoList.some(
+              (item) =>
+                !item ||
+                !item.hasOwnProperty("text") ||
+                !item.hasOwnProperty("isCompleted")
+            )
+          ) {
             throw new Error("잘못된 데이터 형식입니다.");
           }
         };
@@ -67,7 +103,9 @@
         this.render();
       }
       const validData = new Validator();
-      const todoList = TodoList(validData.validate(data));
+      const todoList = new TodoList(validData.validate(data));
+      const todoList2 = new TodoList(validData.validate(data2));
+      const todoList3 = new TodoList(validData.validate(data3));
     </script>
   </body>
 </html>

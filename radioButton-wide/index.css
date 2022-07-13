@@ -1,0 +1,176 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:600");
+body {
+  align-items: center;
+  background: #eef5fd;
+  color: white;
+  display: flex;
+  font-family: "Open Sans", sans-serif;
+  font-size: 20px;
+  height: 100vh;
+  justify-content: center;
+  margin: 0;
+}
+.hhh {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 20px;
+  color: #ffe576;
+}
+
+.pointButton {
+  position: absolute;
+  top: 250px;
+  left: 38px;
+  background-color: #ffe576;
+  border: #ffe576;
+  border-radius: 5px;
+  padding: 10px 30px 10px 30px;
+}
+.showOverlay {
+  bottom: 0;
+  display: flex;
+  font-size: 16px;
+  left: calc(50% - 55px);
+  margin-bottom: 7px;
+  position: absolute;
+}
+.check {
+  bottom: 0;
+  display: flex;
+  left: calc(50% + 40px);
+  margin-bottom: 10px;
+  position: absolute;
+  visibility: hidden;
+}
+.containerOuter {
+  height: 360px;
+  background: rgba(17, 17, 17, 0.9);
+  border-radius: 8px;
+  box-shadow: 2px 6px 20px 2px rgba(10, 10, 120, 0.15);
+}
+.container {
+  display: flex;
+  position: relative;
+  margin: 15px 20px 20px 20px;
+  overflow: hidden;
+  width: 400px;
+  height: 320px;
+}
+.hidden {
+  display: none;
+}
+.entry {
+  height: 25px;
+  position: absolute;
+  width: 160px;
+}
+.entry:nth-child(2) {
+  left: 8px;
+  top: 8px;
+}
+.entry:nth-child(4) {
+  left: 120px;
+  top: 8px;
+}
+.entry:nth-child(6) {
+  left: 8px;
+  top: 108px;
+}
+.entry:nth-child(8) {
+  left: 8px;
+  top: 158px;
+}
+.entry:nth-child(10) {
+  left: 8px;
+  top: 208px;
+}
+.circle {
+  border: 2px solid white;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 20px;
+  position: absolute;
+  transition: border-color 300ms;
+  width: 20px;
+}
+
+.point1 {
+  margin-left: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: #ffe576;
+}
+.point {
+  margin-left: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: #ffe576;
+}
+.entry-label {
+  width: 150px;
+  display: flex;
+  cursor: pointer;
+  margin-top: -3px;
+  padding-left: 40px;
+  user-select: none;
+  -moz-user-select: none;
+}
+
+.overlay {
+  background: #fff;
+  mask: url(#holes);
+  -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAACMCAYAAAAOc+uVAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAItSURBVHic7ZnNjhJBFIVPA0txr0Iyw+tIdOXWaDRufZWZeYbZuMKOUV9Gg+HHGN/BHBcNcSBT1KVOEVycb0mq635UVd9U5zQkif+Y3rkFclhQxYIqFlQZiM8vALQAPgP4AWC1+X0E4ALAFMBzAOPiCixjRfIdyX5g/h7JFyTnJYVKBGckHxQsxJBke2rBK5LF55bdal6fSnCmyO1JhlcyKrhkwbYekBySXNcUfF1L7o7k20jhhsxetxYAJk3T/Kks2EfXmkaHxkXO1MfacgCwmbPNjYsIftV1knzJDYgIfqsgkuJ7bkBE8FcFkRTr3IBzXxay9SOCjyuIFM8dEZxUECmeOyL4tIJIimluQKRRLwFcnqBRDwDMUaFRjwG8quC0zxtk5ACEL6wrksNaZiQfkvwZKRxtM08AfGDgBh2Q6wG4BfAo+sAxXB/xp+6VI3lzTMGSK3/Lgu1mt62fji1W+tH0m+R7dm9iZNVeMnjm9om0mUOs8O+zc47dz84Juh76DJG3NYEqeHLOfVnIYkEVC6pYUMWCKhZUsaCKBVUsqGJBFQuqWFDFgipO3OnEfRcn7qWCTtxTOHFP4cS9Ek7cVZy4qzhxL4ZO3AXoxF2QoxP3DifuW5y4q1hQxYIqFlSxoIoFVSyoYkEVC6pYUMWCKhZUsaCKE3c6cd/FiXupoBP3FE7cUzhxr4QTdxUn7ipO3IuhE3cBOnEX5OjEvcOJ+xYn7ioWVLGgigVV/gKEL4RSyM8Z8wAAAABJRU5ErkJggg==);
+  height: 140px;
+  pointer-events: none;
+  transition: background 300ms;
+  width: 40px;
+}
+.highlight {
+  background: #ffe576;
+  border-radius: 50%;
+  height: 12px;
+  left: 14px;
+  pointer-events: none;
+  position: absolute;
+  top: 14px;
+  transition: transform 400ms cubic-bezier(0.175, 0.885, 0.32, 1.2);
+  transform: translateY(0px);
+  width: 12px;
+}
+.hidden:nth-child(1):checked ~ .highlight {
+  transform: translateY(0);
+}
+.hidden:nth-child(3):checked ~ .highlight {
+  transform: translateX(112px);
+}
+.hidden:nth-child(5):checked ~ .highlight {
+  transform: translateY(100px);
+}
+.hidden:nth-child(7):checked ~ .highlight {
+  transform: translateY(150px);
+}
+.hidden:nth-child(9):checked ~ .highlight {
+  transform: translateY(200px);
+}
+.hidden:nth-child(1):checked + .entry .circle {
+  border-color: #ffe576;
+}
+.hidden:nth-child(3):checked + .entry .circle {
+  border-color: #ffe576;
+}
+.hidden:nth-child(5):checked + .entry .circle {
+  border-color: #ffe576;
+}
+.hidden:nth-child(7):checked + .entry .circle {
+  border-color: #ffe576;
+}
+.hidden:nth-child(9):checked + .entry .circle {
+  border-color: #ffe576;
+}
+/* .check:checked ~ .containerOuter .overlay {
+  background: #ecf0f4;
+} */

@@ -18,12 +18,11 @@ class ListValidator {
   }
 
   static isNotValidData(todoList) {
-    const hasMultipleProperties = (item) =>
-      Object.getOwnPropertyNames(item).length > 1;
-
     const notValidData = todoList.some(
       (item) =>
-        !item || !item.hasOwnProperty("text") || hasMultipleProperties(item)
+        !item ||
+        !item.hasOwnProperty("text") ||
+        !item.hasOwnProperty("isCompleted")
     );
 
     if (notValidData) {
@@ -33,8 +32,8 @@ class ListValidator {
 
   static validate(todoList) {
     this.isFalsy(todoList);
-    this.isNotArray(todoList);
     this.isNotObject(todoList);
+    this.isNotArray(todoList);
     this.isNotValidData(todoList);
 
     return todoList;
@@ -42,27 +41,33 @@ class ListValidator {
 }
 
 class TodoList {
-  constructor(todoList) {
+  constructor(todoList, container) {
     this.todoList = todoList;
+    this.container = container;
   }
 
   render() {
-    const listWrapper = document.querySelector("div#todo-list");
+    const createListItem = (text) => `<li>${text}</li>`;
 
-    const list = this.todoList.map(({ text }) => `<li>${text}</li>`).join("");
+    const list = this.todoList
+      .map(({ text, isCompleted }) =>
+        isCompleted ? createListItem(`<s>${text}</s>`) : createListItem(text)
+      )
+      .join("");
 
-    listWrapper.insertAdjacentHTML("afterbegin", `<ul>${list}</ul>`);
+    this.container.insertAdjacentHTML("afterbegin", `<ul>${list}</ul>`);
+  }
+
+  unmountList() {
+    this.container.removeChild(this.container.childNodes[0]);
+  }
+
+  setState(todoList) {
+    this.todoList = todoList;
+    this.unmountList();
+    this.render();
   }
 }
-
-const list = [
-  {
-    text: "JS 공부하기",
-  },
-  {
-    text: "JS 복습하기",
-  },
-];
 
 /* 
   오류상황 예시
@@ -78,10 +83,69 @@ const list = [
   const wrongValues3 = [{ title: 'asdf' }, { title: 'adsfasdf' }]; 
   */
 
+const list = [
+  {
+    text: "JS 공부하기",
+    isCompleted: true,
+  },
+  {
+    text: "JS 복습하기",
+    isCompleted: false,
+  },
+];
+
+const list1 = [
+  {
+    text: "이직하기",
+    isCompleted: true,
+  },
+  {
+    text: "좋은데로 이직하기",
+    isCompleted: false,
+  },
+];
+
+const list2 = [
+  {
+    text: "기본이 탄탄한 개발자 되기",
+    isCompleted: true,
+  },
+  {
+    text: "기본기 실력쌓기",
+    isCompleted: false,
+  },
+];
+
+const list3 = [
+  {
+    text: "데드리프트",
+    isCompleted: true,
+  },
+  {
+    text: "스쿼트",
+    isCompleted: false,
+  },
+];
+
+const listWrapper = document.querySelector("div#todo-list");
+const listWrapper1 = document.querySelector("div#todo-list-1");
+const listWrapper2 = document.querySelector("div#todo-list-2");
+
 try {
   const validList = ListValidator.validate(list);
-  const todoList = new TodoList(validList);
+  new TodoList(validList, listWrapper).render();
+
+  const validList1 = ListValidator.validate(list1);
+  new TodoList(validList1, listWrapper1).render();
+
+  const validList2 = ListValidator.validate(list2);
+  const todoList = new TodoList(validList2, listWrapper2);
+
   todoList.render();
+
+  setTimeout(() => {
+    todoList.setState(ListValidator.validate(list3));
+  }, 3000);
 } catch (error) {
   alert(error.message);
 }

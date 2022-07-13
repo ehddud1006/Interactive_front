@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      Array.prototype.mockMap = function (callback) {
+        // console.log(callback); // (n) => n * 2
+        const arr = [];
+
+        for (let i = 0; i < this.length; i++) {
+          //   console.log(callback(i));
+          arr.push(callback(i, this)); // 순회마다 2 8 18 32
+          //   arr.push(this[i]);
+        }
+        console.log(arr);
+        return arr;
+      };
+      const nums = [1, 4, 9, 16];
+      const result = nums.mockMap((n, i, arr) => {
+        console.log(n);
+        console.log(i);
+        console.log(arr);
+      });
+
+      console.log(result); // [2, 8, 18, 32]
+    </script>
+  </body>
+</html>
