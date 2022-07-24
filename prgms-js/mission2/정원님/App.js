@@ -196,7 +196,7 @@ class App {
 
   /**
    * 📌 해당되는 index의 todo 삭제하는 메소드입니다.
-   *d
+   *2
    * @param {number} index - 변경할 Todo의 index값
    */
 
