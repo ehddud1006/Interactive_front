@@ -9,5 +9,5 @@
 ### RadioButton
 ![ezgif com-gif-maker (6)](https://user-images.githubusercontent.com/62373865/178108926-f6663ce0-55aa-497c-beea-a595cc4e087c.gif)
 
-### selectBox
+### selectBoxx
 https://codesandbox.io/s/great-kowalevski-8qp0fj?file=/src/styles.css
