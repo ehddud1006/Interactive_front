@@ -14,6 +14,7 @@ const List = ({ el, data, setData, onChangeCompleted, deleteTodoListData }) => {
       return el;
     });
     setData(newData);
+    localStorage.setItem("data", JSON.stringify(newData));
   };
   return (
     <TodoText key={el.id} completed={el.completed}>

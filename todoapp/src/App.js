@@ -7,18 +7,10 @@ import Form from "./components/Form";
 import { DragDropContext } from "react-beautiful-dnd";
 
 function App() {
-  const [data, setData] = useState([
-    {
-      id: "1",
-      text: "공부하기",
-      completed: false,
-    },
-    {
-      id: "2",
-      text: "화이팅하기",
-      completed: false,
-    },
-  ]);
+  console.log(localStorage.getItem("data"));
+  const [data, setData] = useState(
+    localStorage.getItem("data") ? JSON.parse(localStorage.getItem("data")) : []
+  );
 
   const [text, setText] = useState("");
   const onChangeText = (e) => {
@@ -34,12 +26,14 @@ function App() {
       return el;
     });
     setData(newData);
+    localStorage.setItem("data", JSON.stringify(newData));
     console.log(id);
   };
   const deleteTodoListData = (id) => {
     console.log(id);
     const newData = data.filter((el) => id !== el.id);
     setData(newData);
+    localStorage.setItem("data", JSON.stringify(newData));
   };
   const AddTodoListData = (e) => {
     console.log(text);
@@ -51,6 +45,7 @@ function App() {
     };
 
     setData([...data, insertData]);
+    localStorage.setItem("data", JSON.stringify([...data, insertData]));
     setText("");
   };
 
@@ -89,10 +84,12 @@ function App() {
     // };
 
     setData(data);
+    localStorage.setItem("data", JSON.stringify(data));
   };
 
   const deletAllData = () => {
     setData([]);
+    localStorage.setItem("data", JSON.stringify([]));
   };
   return (
     <DragDropContext onDragEnd={onDragEnd}>
