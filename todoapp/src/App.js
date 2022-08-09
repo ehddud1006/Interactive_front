@@ -91,6 +91,9 @@ function App() {
     setData(data);
   };
 
+  const deletAllData = () => {
+    setData([]);
+  };
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div>
@@ -99,6 +102,7 @@ function App() {
         </div>
         <Lists
           data={data}
+          setData={setData}
           onChangeCompleted={onChangeCompleted}
           deleteTodoListData={deleteTodoListData}
         ></Lists>
@@ -107,6 +111,7 @@ function App() {
           AddTodoListData={AddTodoListData}
           onChangeText={onChangeText}
         ></Form>
+        <button onClick={deletAllData}>전체삭제</button>
       </div>
     </DragDropContext>
   );

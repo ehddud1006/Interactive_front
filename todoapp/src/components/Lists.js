@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 
 import styled from "styled-components";
-import { TodoText } from "./style";
+
 import { Droppable } from "react-beautiful-dnd";
 import { Draggable } from "react-beautiful-dnd";
+import List from "./List";
 const Container = styled.div``;
 const TodoList = styled.div``;
-const Lists = ({ data, onChangeCompleted, deleteTodoListData }) => {
+const Lists = ({ data, setData, onChangeCompleted, deleteTodoListData }) => {
   return (
     <Droppable droppableId={"drop1"}>
       {(provided) => (
@@ -20,17 +21,13 @@ const Lists = ({ data, onChangeCompleted, deleteTodoListData }) => {
                     {...provided.dragHandleProps}
                     ref={provided.innerRef}
                   >
-                    <TodoText key={el.id} completed={el.completed}>
-                      <input
-                        onChange={() => onChangeCompleted(el.id)}
-                        type="checkbox"
-                        defaultChecked={false}
-                      ></input>
-                      <div>{el.text}</div>
-                      <button onClick={() => deleteTodoListData(el.id)}>
-                        x
-                      </button>
-                    </TodoText>
+                    <List
+                      el={el}
+                      data={data}
+                      setData={setData}
+                      onChangeCompleted={onChangeCompleted}
+                      deleteTodoListData={deleteTodoListData}
+                    ></List>
                   </Container>
                 )}
               </Draggable>
