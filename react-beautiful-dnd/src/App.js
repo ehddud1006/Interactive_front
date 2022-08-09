@@ -10,10 +10,13 @@ const Container = styled.div`
 `;
 function App() {
   const [state, setState] = useState(initialData);
-
-  const onDragStart = () => {
+  const [homeIndex, setHomeIndex] = useState();
+  const onDragStart = (start) => {
+    const homeIndex = state.columnOrder.indexOf(start.source.droppableId);
     document.body.style.color = "orange";
     document.body.style.transition = "background-color 0.2 ease";
+    console.log(homeIndex);
+    setHomeIndex(homeIndex);
   };
 
   const onDragUpdate = (update) => {
@@ -25,11 +28,11 @@ function App() {
     document.body.style.backgroundColor = `rgba(153,141,217,${opacity})`;
   };
   const onDragEnd = (result) => {
+    setHomeIndex(null);
     document.body.style.color = "inherit";
     document.body.style.backgroundColor = "inherit";
     const { destination, source, draggableId } = result;
 
-    console.log(result);
     // 목적지가 없는 경우 (단순에러일듯)
     if (!destination) {
       return;
@@ -106,11 +109,22 @@ function App() {
       onDragEnd={onDragEnd}
     >
       <Container>
-        {state.columnOrder.map((columnId) => {
+        {state.columnOrder.map((columnId, index) => {
           const column = state.columns[columnId];
           const tasks = column.taskIds.map((taskId) => state.tasks[taskId]);
-
-          return <Column key={column.id} column={column} tasks={tasks} />;
+          console.log("index", index);
+          console.log("homeIndex", homeIndex);
+          console.log(typeof homeIndex);
+          const isDropDisabled = index < Number(homeIndex);
+          console.log(isDropDisabled);
+          return (
+            <Column
+              key={column.id}
+              column={column}
+              tasks={tasks}
+              isDropDisabled={isDropDisabled}
+            />
+          );
         })}
       </Container>
     </DragDropContext>

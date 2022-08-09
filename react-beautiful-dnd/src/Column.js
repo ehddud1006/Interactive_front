@@ -21,11 +21,11 @@ const TaskList = styled.div`
   flex-grow: 1;
   min-height: 100px;
 `;
-const Column = ({ column, tasks }) => {
+const Column = ({ column, tasks, isDropDisabled }) => {
   return (
     <Container>
       <Title>{column.title}</Title>
-      <Droppable droppableId={column.id}>
+      <Droppable droppableId={column.id} isDropDisabled={isDropDisabled}>
         {(provided, snapshot) => (
           <TaskList
             {...provided.droppableProps}
