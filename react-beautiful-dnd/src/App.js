@@ -4,6 +4,10 @@ import "./App.css";
 import { initialData } from "./initialData";
 import Column from "./Column";
 import { DragDropContext } from "react-beautiful-dnd";
+import styled from "styled-components";
+const Container = styled.div`
+  display: flex;
+`;
 function App() {
   const [state, setState] = useState(initialData);
 
@@ -38,31 +42,58 @@ function App() {
     )
       return;
 
-    const column = state.columns[source.droppableId];
-    console.log(column);
-    const newTaskIds = [...column.taskIds];
-    console.log(newTaskIds);
+    const start = state.columns[source.droppableId];
+    const finish = state.columns[destination.droppableId];
+    if (start === finish) {
+      const newTaskIds = [...start.taskIds];
 
-    //[3 4 1 2] 의 task Id를 가질때 '2'라는 taskId를 index 가 1인 위치에 옮긴다고 가정하자.
-    // 현재 taskId = 2 인 리스트의 index는 4 이다.
-    // 즉 splice 한 배열의 결과값은 [3 4 1] 이 된다.
-    newTaskIds.splice(source.index, 1);
+      //[3 4 1 2] 의 task Id를 가질때 '2'라는 taskId를 index 가 1인 위치에 옮긴다고 가정하자.
+      // 현재 taskId = 2 인 리스트의 index는 4 이다.
+      // 즉 splice 한 배열의 결과값은 [3 4 1] 이 된다.
+      newTaskIds.splice(source.index, 1);
 
-    // 이 리스트를 index = 1 의 자리로 옮기기 때문에,
-    // splice 한 값은 [3 2 4 1] 이 된다.
-    newTaskIds.splice(destination.index, 0, draggableId);
+      // 이 리스트를 index = 1 의 자리로 옮기기 때문에,
+      // splice 한 값은 [3 2 4 1] 이 된다.
+      newTaskIds.splice(destination.index, 0, draggableId);
 
-    // 기존의 taskIds을  새롭게 얻은 값인 newTaskIds으로 업데이트 한다.
-    const newColumn = {
-      ...column,
-      taskIds: newTaskIds,
+      // 기존의 taskIds을  새롭게 얻은 값인 newTaskIds으로 업데이트 한다.
+      const newColumn = {
+        ...start,
+        taskIds: newTaskIds,
+      };
+
+      const newState = {
+        ...state,
+        columns: {
+          ...state.columns,
+          [newColumn.id]: newColumn,
+        },
+      };
+
+      setState(newState);
+      return;
+    }
+
+    const startTaskIds = [...start.taskIds];
+    startTaskIds.splice(source.index, 1);
+    const newStart = {
+      ...start,
+      taskIds: startTaskIds,
+    };
+
+    const finishTaskIds = Array.from(finish.taskIds);
+    finishTaskIds.splice(destination.index, 0, draggableId);
+    const newFinish = {
+      ...finish,
+      taskIds: finishTaskIds,
     };
 
     const newState = {
       ...state,
       columns: {
         ...state.columns,
-        [newColumn.id]: newColumn,
+        [newStart.id]: newStart,
+        [newFinish.id]: newFinish,
       },
     };
 
@@ -74,12 +105,14 @@ function App() {
       onDragUpdate={onDragUpdate}
       onDragEnd={onDragEnd}
     >
-      {state.columnOrder.map((columnId) => {
-        const column = state.columns[columnId];
-        const tasks = column.taskIds.map((taskId) => state.tasks[taskId]);
+      <Container>
+        {state.columnOrder.map((columnId) => {
+          const column = state.columns[columnId];
+          const tasks = column.taskIds.map((taskId) => state.tasks[taskId]);
 
-        return <Column key={column.id} column={column} tasks={tasks} />;
-      })}
+          return <Column key={column.id} column={column} tasks={tasks} />;
+        })}
+      </Container>
     </DragDropContext>
   );
 }
