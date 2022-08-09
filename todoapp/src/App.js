@@ -2,9 +2,10 @@ import logo from "./logo.svg";
 import "./App.css";
 
 import React, { useState } from "react";
-import { getByTitle } from "@testing-library/react";
 import Lists from "./components/Lists";
 import Form from "./components/Form";
+import { DragDropContext } from "react-beautiful-dnd";
+
 function App() {
   const [data, setData] = useState([
     {
@@ -44,7 +45,7 @@ function App() {
     console.log(text);
     e.preventDefault();
     let insertData = {
-      id: Date.now(),
+      id: String(Date.now()),
       text: text,
       completed: false,
     };
@@ -52,8 +53,46 @@ function App() {
     setData([...data, insertData]);
     setText("");
   };
+
+  const onDragEnd = (result) => {
+    const { destination, source, draggableId } = result;
+
+    console.log(result);
+    // 목적지가 없는 경우 (단순에러일듯)
+    if (!destination) {
+      return;
+    }
+
+    // 드래그했지만 드롭을 제자리에 한 경우
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    )
+      return;
+
+    const insert = data[source.index];
+    data.splice(source.index, 1);
+    data.splice(destination.index, 0, insert);
+    // newTaskIds.splice(destination.index, 0, draggableId);
+
+    // const newColumn = {
+    //   ...column,
+    //   taskIds: newTaskIds,
+    // };
+
+    // const newState = {
+    //   ...state,
+    //   columns: {
+    //     ...state.columns,
+    //     [newColumn.id]: newColumn,
+    //   },
+    // };
+
+    setData(data);
+  };
+
   return (
-    <div>
+    <DragDropContext onDragEnd={onDragEnd}>
       <div>
         <div>
           <h1>할 일 목록</h1>
@@ -69,7 +108,7 @@ function App() {
           onChangeText={onChangeText}
         ></Form>
       </div>
-    </div>
+    </DragDropContext>
   );
 }
 
