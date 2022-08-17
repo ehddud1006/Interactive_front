@@ -21,7 +21,7 @@
 
 .movie {
   flex: 1 1 auto;
-  display: inline-block;
+  display: inline-flex;
   padding-right: 0.5rem;
   padding-bottom: 7rem;
 }
