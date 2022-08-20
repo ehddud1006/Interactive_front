@@ -9,7 +9,7 @@ module.exports = {
     extensions: [".js", ".jsx"], // resolve 를 적어줌으로써 entry에서 확장자명 생략 가능
   },
   entry: {
-    app: ["./client"],
+    app: ["./index"],
   }, // 입력
 
   module: {
