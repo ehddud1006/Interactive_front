@@ -1,5 +1,6 @@
-echo "$(pwd)"
-
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
+echo "$(pwd)"
+cd .husky
+echo "$(pwd)"
