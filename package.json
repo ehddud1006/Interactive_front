@@ -1,0 +1,23 @@
+{
+  "name": "interactive_front",
+  "version": "1.0.0",
+  "description": "![ezgif com-gif-maker (4)](https://user-images.githubusercontent.com/62373865/177709923-06b89272-691d-4cb2-bcd5-33b5d3cd63e0.gif)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ehddud1006/Interactive_front.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ehddud1006/Interactive_front/issues"
+  },
+  "homepage": "https://github.com/ehddud1006/Interactive_front#readme",
+  "devDependencies": {
+    "husky": "^8.0.1"
+  }
+}
