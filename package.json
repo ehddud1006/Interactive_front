@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky install",
-    "hello": "echo HELLO HUSKY"
+    "hello": "echo HELLO HUSKY",
+    "he": "sh test.sh"
   },
   "repository": {
     "type": "git",

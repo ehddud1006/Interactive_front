@@ -1,5 +1,5 @@
 {
-    "hooks": {
-        "pre-commit": "echo 'Hello Gabia, woof!'"
-    }
+  "hooks": {
+    "pre-push": "./huskyhooks/pre-push"
+  }
 }
