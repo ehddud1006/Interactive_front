@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "hello": "echo HELLO HUSKY"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,6 @@
   },
   "homepage": "https://github.com/ehddud1006/Interactive_front#readme",
   "devDependencies": {
-    "husky": "^8.0.1"
+    "husky": "^8.0.0"
   }
 }
