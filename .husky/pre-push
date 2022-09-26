@@ -3,4 +3,4 @@
 
 echo "$(pwd)"
 cd .husky
-echo "$(pwd)"
+source ./test.sh
